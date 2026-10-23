@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Roomcast — AR Placement</title>
+<link rel="stylesheet" href="css/base.css" />
+<style>
+  #canvasWrap{ position:relative; height:100%; }
+  canvas{ display:block; width:100%; height:100%; }
+  #landing{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; text-align:center; padding:8vw; gap:16px; }
+  #landing a.back{ position:absolute; top:18px; left:18px; color:var(--muted); text-decoration:none; font-size:13px; }
+  #landing h1{ font-family:'Fraunces', Georgia, serif; font-size:clamp(26px,6vw,38px); margin:0; }
+  #landing p{ color:var(--muted); max-width:420px; line-height:1.6; font-size:14.5px; margin:0; }
+  #enterBtn{ background:var(--brass); color:#1A1A16; border:none; padding:13px 26px;
+    border-radius:8px; font-size:14.5px; font-weight:700; cursor:pointer; margin-top:6px; }
+  #enterBtn:disabled{ opacity:.5; }
+  #status{ font-size:12.5px; color:var(--muted); }
+  #overlay{ position:absolute; inset:0; pointer-events:none; display:none; }
+  #overlay.active{ display:block; }
+  #hint{ position:absolute; top:14px; left:50%; transform:translateX(-50%);
+    background:rgba(29,32,36,.85); color:var(--ink); font-size:12.5px;
+    padding:8px 14px; border-radius:20px; pointer-events:none; text-align:center; max-width:80vw; }
+  #exitBtn{ position:absolute; top:14px; right:14px; pointer-events:auto;
+    background:rgba(29,32,36,.85); border:1px solid var(--line); color:var(--ink);
+    padding:8px 12px; border-radius:8px; font-size:12px; cursor:pointer; }
+  #palette{ position:absolute; left:0; right:0; bottom:0; pointer-events:auto;
+    background:linear-gradient(180deg, transparent, rgba(21,23,26,.92) 40%);
+    padding:12px 14px 14px; display:flex; flex-direction:column; gap:10px; }
+  #catalogRow{ display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; }
+  #catalogRow button{ flex:0 0 auto; background:#22262B; border:1px solid var(--line); color:var(--ink);
+    padding:9px 12px; border-radius:20px; font-size:12.5px; white-space:nowrap; cursor:pointer; }
+  #catalogRow button.active{ border-color:var(--brass); color:var(--brass); }
+  #toolRow{ display:flex; gap:8px; }
+  #toolRow button{ flex:1; background:#22262B; border:1px solid var(--line); color:var(--ink);
+    padding:10px 6px; border-radius:8px; font-size:12px; cursor:pointer; }
+  #toolRow button.active{ border-color:var(--brass); color:var(--brass); }
+  #toolRow #removeBtn{ background:#2A1E1E; border-color:#4A2A2A; color:#E4A0A0; }
+</style>
+</head>
+<body>
+<div id="canvasWrap">
+  <div id="landing">
+    <a class="back" href="index.html">← Modes</a>
+    <h1>Real-time AR placement</h1>
+    <p>Point your camera at the floor. Roomcast finds the surface, then you tap to drop furniture right into the room and adjust it in place.</p>
+    <button id="enterBtn">Enable camera & start AR</button>
+    <div id="status"></div>
+  </div>
+
+  <div id="overlay">
+    <div id="hint">Move your phone to find the floor, then tap to place</div>
+    <button id="exitBtn">End AR</button>
+    <div id="palette">
+      <div id="catalogRow"></div>
+      <div id="toolRow">
+        <button id="rotL">⟲</button>
+        <button id="moveBtn">Move</button>
+        <button id="rotR">⟳</button>
+        <button id="scaleDown">−</button>
+        <button id="scaleUp">+</button>
+        <button id="removeBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "./js/lib/three.module.js" } }
+</script>
+<script type="module" src="js/ar.js"></script>
+</body>
+</html>

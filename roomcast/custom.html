@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Roomcast — Room Editor</title>
+<link rel="stylesheet" href="css/base.css" />
+<style>
+  html,body{ overflow:hidden; }
+  #app{ display:flex; height:100%; }
+  #canvasWrap{ flex:1; position:relative; }
+  canvas{ display:block; touch-action:none; }
+  #topbar{ position:absolute; top:0; left:0; right:0; padding:14px 18px;
+    display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+  #topbar a{ color:var(--muted); text-decoration:none; font-size:13px; pointer-events:auto; }
+  #topbar a:hover{ color:var(--brass); }
+  #topbar .title{ font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+  #sidebar{ width:250px; background:var(--panel); border-left:1px solid var(--line);
+    padding:18px 16px; overflow-y:auto; display:flex; flex-direction:column; gap:18px; }
+  #sidebar h1{ font-family:'Fraunces', Georgia, serif; font-size:20px; margin:0; }
+  #sidebar p.hint{ margin:0; color:var(--muted); font-size:12.5px; line-height:1.5; }
+  .catalog{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  .catalog-btn{ background:#22262B; border:1px solid var(--line); color:var(--ink);
+    border-radius:8px; padding:12px 8px; font-size:12.5px; cursor:pointer;
+    display:flex; flex-direction:column; align-items:center; gap:6px; transition:border-color .15s ease; }
+  .catalog-btn:hover{ border-color:var(--brass); }
+  .catalog-btn:disabled{ opacity:.5; cursor:wait; }
+  .catalog-btn .dot{ width:18px; height:18px; border-radius:50%; background:var(--brass); opacity:.7; }
+  #inspector{ border-top:1px solid var(--line); padding-top:16px; display:none; flex-direction:column; gap:10px; }
+  #inspector.active{ display:flex; }
+  #inspector .name{ font-size:15px; font-weight:600; }
+  .row{ display:flex; gap:8px; }
+  .row .btn{ flex:1; }
+  #emptyState{ color:var(--muted); font-size:12.5px; padding-top:16px; border-top:1px solid var(--line); }
+  #hud{ position:absolute; bottom:16px; left:18px; font-size:12px; color:var(--muted);
+    background:rgba(29,32,36,.7); padding:8px 12px; border-radius:8px; pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="canvasWrap">
+    <div id="topbar">
+      <a href="index.html">← Modes</a>
+      <span class="title">Room Editor</span>
+    </div>
+    <div id="hud">Drag to orbit · Tap furniture to select · Tap floor to move it</div>
+  </div>
+  <div id="sidebar">
+    <div>
+      <h1>Furniture</h1>
+      <p class="hint">Tap a piece to add it to the room, then tap it in the scene to select and adjust.</p>
+    </div>
+    <div>
+      <div class="section-label" style="margin-bottom:8px;">Catalog</div>
+      <div class="catalog" id="catalog"></div>
+    </div>
+    <div id="inspector">
+      <div class="name" id="inspName">—</div>
+      <div class="section-label">Rotate</div>
+      <div class="row"><button class="btn" id="rotL">⟲ 15°</button><button class="btn" id="rotR">15° ⟳</button></div>
+      <div class="section-label">Scale</div>
+      <div class="row"><button class="btn" id="scaleDown">− smaller</button><button class="btn" id="scaleUp">+ larger</button></div>
+      <button class="btn danger" id="deleteBtn">Remove piece</button>
+    </div>
+    <div id="emptyState">Nothing selected. Tap a piece of furniture in the room to edit it.</div>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": { "three": "./js/lib/three.module.js" } }
+</script>
+<script type="module" src="js/custom.js"></script>
+</body>
+</html>
