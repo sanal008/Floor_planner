@@ -8,6 +8,31 @@ vision pipeline on the back end, and a standalone **WebXR** app for AR.
 
 ---
 
+## Demo
+
+**[▶ Watch the walkthrough](https://github.com/sanal008/Floor_planner/raw/main/docs/floor-planner-demo.mp4)**
+([file in repo](docs/floor-planner-demo.mp4) · MP4 · ~105 MB)
+
+A screen recording of the app running end to end:
+
+1. **Floor Plan → 3D** — the plan image is uploaded, the Flask/OpenCV pipeline
+   returns walls, rooms, doors and windows as Building JSON, and the frontend
+   extrudes it into a 3D building with real wall thickness, door swings and
+   glazed windows. The debug overlay (detected walls in red, rooms in green,
+   doors in cyan, windows in orange) shows what the detector found before the
+   furniture is clicked into place on the generated floors.
+
+2. **Custom Placement** — the empty room editor: furniture is dropped from the
+   catalog, then dragged to move, rotated, scaled up/down and deleted; the
+   floor and wall colours are changed and the camera is orbited, panned and
+   tilted around the room.
+
+> The video is stored with [Git LFS](https://git-lfs.com) because it exceeds
+> GitHub's 100 MB per-file limit. Clones need `git lfs install` before
+> cloning, or a `git lfs pull` afterwards, to fetch it.
+
+---
+
 ## Modes
 
 | Mode | Where | What it does |
@@ -24,6 +49,8 @@ vision pipeline on the back end, and a standalone **WebXR** app for AR.
 ```
 .
 ├── README.md
+├── docs/
+│   └── floor-planner-demo.mp4         # screen recording of the app (Git LFS)
 ├── sample_floorplan.png               # synthetic test plan (4 rooms, doors, windows)
 ├── sample_floorplan_hand_drawn.jpeg   # hand-drawn plans for pipeline testing
 ├── sample_floorplan_hand_drawn2.jpg
@@ -66,6 +93,8 @@ vision pipeline on the back end, and a standalone **WebXR** app for AR.
 
 - **Python** 3.10+
 - **Node.js** 18+ (npm 9+)
+- **Git LFS** — only for the demo video (`git lfs install`, then
+  `git lfs pull` after cloning)
 - A Chromium-based browser for the WebXR / camera modes
 
 ### 1. Backend (Flask + OpenCV)
