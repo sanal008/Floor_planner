@@ -11,7 +11,7 @@ vision pipeline on the back end, and a standalone **WebXR** app for AR.
 ## Demo
 
 **[▶ Watch the walkthrough](https://github.com/sanal008/Floor_planner/raw/main/docs/floor-planner-demo.mp4)**
-([file in repo](docs/floor-planner-demo.mp4) · MP4 · ~105 MB)
+— MP4, ~105 MB, at [`docs/floor-planner-demo.mp4`](docs/floor-planner-demo.mp4).
 
 A screen recording of the app running end to end:
 
@@ -27,9 +27,13 @@ A screen recording of the app running end to end:
    floor and wall colours are changed and the camera is orbited, panned and
    tilted around the room.
 
-> The video is stored with [Git LFS](https://git-lfs.com) because it exceeds
-> GitHub's 100 MB per-file limit. Clones need `git lfs install` before
-> cloning, or a `git lfs pull` afterwards, to fetch it.
+> **Notes**
+>
+> - GitHub will not stream repository files this large, so the link downloads
+>   the recording — open it in VLC, QuickTime, or your browser's player.
+> - The file is stored with [Git LFS](https://git-lfs.com) because it exceeds
+>   GitHub's 100 MB per-file limit. Run `git lfs install` before cloning (or
+>   `git lfs pull` afterwards) to fetch it along with the repo.
 
 ---
 
@@ -49,6 +53,7 @@ A screen recording of the app running end to end:
 ```
 .
 ├── README.md
+├── .gitattributes                      # Git LFS tracking (docs/*.mp4)
 ├── docs/
 │   └── floor-planner-demo.mp4         # screen recording of the app (Git LFS)
 ├── sample_floorplan.png               # synthetic test plan (4 rooms, doors, windows)
